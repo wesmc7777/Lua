@@ -187,7 +187,7 @@ function parse_action_packet(act)
                 elseif m.message == 435 or m.message == 436 then m.simp_name = act.action.name..' (JAs)'
                 elseif m.message == 437 or m.message == 438 then m.simp_name = act.action.name..' (JAs and TP)'
                 elseif m.message == 439 or m.message == 440 then m.simp_name = act.action.name..' (SPs, JAs, TP, and MP)'
-                elseif T{252,265,268,269,271,272,274,275,379,650}:contains(m.message) then m.simp_name = 'Magic Burst! '..act.action.name
+                elseif T{252,265,268,269,271,272,274,275,379,650}:contains(m.message) then m.simp_name = '------> Magic Burst! '..act.action.name
                 elseif not act.action then 
                    m.simp_name = ''
                    act.action = {}
@@ -276,7 +276,7 @@ function parse_action_packet(act)
             if m.has_add_effect and m.add_effect_message ~= 0 and add_effect_valid[act.category] then
                 local targ = assemble_targets(act.actor,v.target,act.category,m.add_effect_message)
                 local color = color_filt(res.action_messages[m.add_effect_message].color,v.target[1].id==Self.id)
-                if m.add_effect_message > 287 and m.add_effect_message < 303 then m.simp_add_name = skillchain_arr[m.add_effect_message-287]
+                if m.add_effect_message > 287 and m.add_effect_message < 303 then m.simp_add_name = '  <<<<<<< SKILLCHAIN '..skillchain_arr[m.add_effect_message-287]..' >>>>>>>  '
                 elseif m.add_effect_message > 384 and m.add_effect_message < 399 then m.simp_add_name = skillchain_arr[m.add_effect_message-384]
                 elseif m.add_effect_message > 766 and m.add_effect_message < 769 then m.simp_add_name = skillchain_arr[m.add_effect_message-752]
                 elseif m.add_effect_message > 768 and m.add_effect_message < 771 then m.simp_add_name = skillchain_arr[m.add_effect_message-754]
@@ -614,7 +614,7 @@ function get_spell(act)
                 spell = res.weapon_skills[abil_ID]
             end
             if spell then
-                spell.name = color_it(spell[language],color_arr.wscol)
+                spell.name = ' <<< '..color_it(spell[language],color_arr.wscol)..' >>> '
                 spell.weapon_skill = color_it(spell[language],color_arr.wscol)
             end
         elseif msg_ID == 303 then
